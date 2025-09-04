@@ -1,5 +1,13 @@
 # A simple MERN stack application 
 
+# Folder Structure
+
+mern-docker-compose/
+├── backend/ # Express + Node.js backend
+├── frontend/ # React frontend
+├── docker-compose.yml
+└── README.md
+
 ### Create a network for the docker containers
 
 `docker network create demo`
