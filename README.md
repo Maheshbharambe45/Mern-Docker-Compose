@@ -1,48 +1,75 @@
-# A simple MERN stack application 
+# 🚀 MERN Docker Compose
 
-# Folder Structure
+A simple MERN (MongoDB, Express, React, Node.js) stack application using Docker and Docker Compose.
 
-mern-docker-compose/
-├── backend/ # Express + Node.js backend
-├── frontend/ # React frontend
-├── docker-compose.yml
-└── README.md
+---
 
-### Create a network for the docker containers
+## 🐳 Run with Docker Compose (Recommended)
 
-`docker network create demo`
+```bash
+docker compose up -d
+```
 
-### Build the client 
+🖥️ **Frontend:** [http://localhost:5173](http://localhost:5173)  
 
-```sh
+⚙️ **Backend:** [http://localhost:5050](http://localhost:5050)  
+
+🗄️ **MongoDB:** `localhost:27017`  
+
+---
+
+### 🛑 Stop and remove all containers, networks, and volumes:
+
+```bash
+docker compose down --volumes
+```
+
+---
+
+## ⚙️ Manual Setup (Optional)
+
+### 1. Create Docker Network
+
+```bash
+docker network create demo
+```
+
+---
+
+### 2. Frontend
+
+```bash
 cd mern/frontend
 docker build -t mern-frontend .
+docker run --name=frontend --network=demo -d -p 5173:5173 mern-frontend
 ```
 
-### Run the client
+---
 
-`docker run --name=frontend --network=demo -d -p 5173:5173 mern-frontend`
+### 3. MongoDB
 
-### Verify the client is running
+```bash
+docker run --network=demo --name mongodb -d -p 27017:27017 -v ~/opt/data:/data/db mongo:latest
+```
 
-Open your browser and type `http://localhost:5173`
+---
 
-### Run the mongodb container
+### 4. Backend
 
-`docker run --network=demo --name mongodb -d -p 27017:27017 -v ~/opt/data:/data/db mongo:latest`
-
-### Build the server
-
-```sh
+```bash
 cd mern/backend
 docker build -t mern-backend .
+docker run --name=backend --network=demo -d -p 5050:5050 mern-backend
 ```
 
-### Run the server
+---
 
-`docker run --name=backend --network=demo -d -p 5050:5050 mern-backend`
+## 🧰 Tech Stack
 
-## Using Docker Compose
-
-`docker compose up -d`
-
+- MongoDB  
+- Express.js  
+- React.js
+- Node.js  
+- Docker & Docker Compose
+- Node.js  
+- Docker & Docker Compose
